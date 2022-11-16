@@ -7,8 +7,8 @@ const lazyValue = () => {
 
 const UseStateHook = () => {
   //1- what is useState
-  // console.log(useState('hello'));
-  // const [state, setState] = useState(100);
+  console.log(useState('hello'));
+  const [state, setState] = useState(100);
 
   //2- lazy state initiation : expression that could be computationally expensive {"x": 123}
   /**
@@ -31,7 +31,7 @@ const UseStateHook = () => {
   // updateState+ 1 ||             setUpdateState((value) => value + 1);
   // use function if previous state depends on the previous state
   //
-  const [updateState, setUpdateState] = useState(0);
+  // const [updateState, setUpdateState] = useState(0);
 
   return (
     <div style={{ width: '90%' }}>
@@ -46,9 +46,9 @@ const UseStateHook = () => {
       >
         {/* 1 */}
 
-        {/* <div style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
           <h2>What is useState?</h2> <h2>{state}</h2>
-        </div> */}
+        </div>
 
         {/* 2 */}
         {/* <div
@@ -68,7 +68,7 @@ const UseStateHook = () => {
         </div> */}
 
         {/* 3 */}
-        <div
+        {/* <div
           onClick={() => {
             // setUpdateState((value) => value + 1);
             // state never gets updated
@@ -84,7 +84,7 @@ const UseStateHook = () => {
         >
           <h2>Update State</h2>
           <h2>{updateState}</h2>
-        </div>
+        </div> */}
       </div>
     </div>
   );

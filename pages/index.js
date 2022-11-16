@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import UseEffectHook from '../workshop/UseEffectHook';
 import UseStateHook from '../workshop/UseStateHook';
 
 export default function Home() {
@@ -12,7 +13,8 @@ export default function Home() {
           <br />
           <a href='/'>Everything React</a>
         </h1>
-        <UseStateHook />
+        {/* <UseStateHook /> */}
+        <UseEffectHook />
       </main>
     </div>
   );
