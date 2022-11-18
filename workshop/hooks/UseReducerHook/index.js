@@ -87,6 +87,10 @@ const UseReducerHook = () => {
           }}
         >
           <h2 style={{ fontSize: '2rem' }}>UseReducer in complexity?</h2>
+          <h2 style={{ fontSize: '1.5rem' }}>
+            Counter:{newState.counter} , Step: {newState.step}
+          </h2>
+
           <div
             style={{
               display: 'flex',
@@ -104,7 +108,7 @@ const UseReducerHook = () => {
               }}
               onClick={() => dispatch({ type: 'increment_counter' })}
             >
-              Increment Counter: {newState.counter}
+              Increment Counter
             </button>
             <button
               style={{
@@ -115,7 +119,7 @@ const UseReducerHook = () => {
               }}
               onClick={() => dispatch({ type: 'decrement_counter' })}
             >
-              Decrement Counter: {newState.counter}
+              Decrement Counter
             </button>
             <button
               style={{
@@ -126,13 +130,13 @@ const UseReducerHook = () => {
               }}
               onClick={() => dispatch({ type: 'increment_step', payload: 5 })}
             >
-              Increment Step: {newState.step}
+              Increment Step
             </button>
             <button
               style={{ padding: '1rem', background: 'red', color: 'white' }}
               onClick={() => dispatch({ type: 'decrement_step', payload: 2 })}
             >
-              decrement Step: {newState.step}
+              decrement Step
             </button>
           </div>
         </div>
