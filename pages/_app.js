@@ -1,11 +1,13 @@
+import { Inter } from '@next/font/google';
 import '../styles/globals.css';
-import { ChakraProvider } from '@chakra-ui/react';
 
+const inter = Inter({ subsets: ['latin'] });
+// import { ChakraProvider } from '@chakra-ui/react';
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <main className={inter.className}>
       <Component {...pageProps} />
-    </ChakraProvider>
+    </main>
   );
 }
 
