@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
+import RemoteComponent from './RemoteComponent';
 // Destructing
 // State machines
 // Compound components
@@ -8,9 +9,9 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 // Comparator
 
 //Eager
-// function loadComponent() {
-//   import('./Component'); // get caached in memory
-// }
+function loadComponent() {
+  import('./RemoteComponent'); // get caached in memory
+}
 const Button = (props) => {
   const [counter, setCounter] = useState(0);
   return (
@@ -73,20 +74,20 @@ const Destructure = () => {
       onMouseLeave={() => setCounter(false)}
     >
       {/* Destructure */}
-      {/* <Button color={'blue'} />
-      <Button color={''} />
+      {/* <Button color={'blue'} {...props} />
+      <Button color={''} {...props} />
       <Button {...props} color='red' /> */}
-      {/* Lazy  */}
+      {/* Lazy   */}
       {/* <Suspense fallback={<div>Loading</div>}>
         <Button {...props} color='red' />
       </Suspense> */}
       {/* Eager */}
-      {/* <div style={{ color: 'green' }} onMouseOver={loadComponent}>
+      <div style={{ color: 'green' }} onMouseOver={loadComponent}>
         Eager Loading me
       </div>
       <Suspense fallback={<div>Loading</div>}>
-        <Button {...props} color='blue' />
-      </Suspense> */}
+        <RemoteComponent />
+      </Suspense>
       {/* Memo */}
       <h2>Memo</h2>
       <CustomUI prop1={Math.random()} />

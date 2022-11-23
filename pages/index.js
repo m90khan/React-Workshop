@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import UseCallbackHook from '../workshop/hooks/UseCallbackHook';
+// import UseCallbackHook from '../workshop/hooks/UseCallbackHook';
 import UseEffectHook from '../workshop/hooks/UseEffectHook';
 import UseMemoHook from '../workshop/hooks/UseMemoHook';
 import UseReducerHook from '../workshop/hooks/UseReducerHook';
@@ -12,7 +12,9 @@ import UseContextHook from '../workshop/hooks/UseContextHook';
 import CustomHook from '../workshop/hooks/useCustomHook';
 import Destructure from '../workshop/patterns/Destructure';
 // import CustomHookComp from '../workshop/CustomHookComp';
-
+const UseCallbackHook = dynamic(() => import('../workshop/hooks/UseCallbackHook'), {
+  ssr: false,
+});
 const CustomHookComp = dynamic(() => import('../workshop/hooks/CustomHookComp'), {
   ssr: false,
 });
@@ -24,9 +26,9 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href='/'>Everything React</a>
         </h1>
-        <UseStateHook />
+        {/* <UseStateHook /> */}
         {/* <UseEffectHook /> */}
-        {/* <UseRefHook /> */}
+        <UseRefHook />
         {/* <UseReducerHook /> */}
         {/* <UseMemoHook /> */}
         {/* <UseCallbackHook /> */}

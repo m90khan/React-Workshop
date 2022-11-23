@@ -7,7 +7,7 @@ const lazyValue = () => {
 
 const UseStateHook = () => {
   //1- what is useState
-  console.log(useState('hello'));
+  // console.log(useState('hello'));
   const [state, setState] = useState(100);
 
   //2- lazy state initiation : expression that could be computationally expensive {"x": 123}
@@ -22,16 +22,16 @@ const UseStateHook = () => {
    Strict Mode => re-renders twice to check if render worked => next.config.js
    */
 
-  // const [lazyState, setLazyState] = useState(lazyValue);
+  // const [lazyState, setLazyState] = useState(lazyValue); // 1=> 1
   // const [lazyState, setLazyState] = useState(console.log('hello world'));
   // not a good idea to store a function as a state but it is possible
-  // const [lazyState, setLazyState] = useState(()=> ()=>console.log('hello world'));
+  //const [lazyState, setLazyState] = useState(()=>()=>console.log('hello world'));
 
   //3- updating state
   // updateState+ 1 ||             setUpdateState((value) => value + 1);
   // use function if previous state depends on the previous state
   //
-  // const [updateState, setUpdateState] = useState(0);
+  const [updateState, setUpdateState] = useState(0);
 
   return (
     <div style={{ width: '90%' }}>
@@ -53,8 +53,8 @@ const UseStateHook = () => {
         {/* 2 */}
         {/* <div
           onClick={() => {
-            // setLazyState(Math.random());
-            setLazyState(200); // state does not change after a while so no re-render
+            setLazyState(Math.random());
+            //  setLazyState(200); // state does not change after a while so no re-render
           }}
           style={{
             display: 'flex',
@@ -68,12 +68,12 @@ const UseStateHook = () => {
         </div> */}
 
         {/* 3 */}
-        {/* <div
+        <div
           onClick={() => {
-            // setUpdateState((value) => value + 1);
+            setUpdateState((value) => value + 1);
             // state never gets updated
-            setUpdateState(updateState + 1); // internally compare if there is a state change and the value is not the current value of current function
-            setTimeout(() => setUpdateState(updateState + 1), 2000);
+            // setUpdateState(updateState + 1); // internally compare if there is a state change and the value is not the current value of current function
+            setTimeout(() => setUpdateState((val) => val + 1), 2000);
           }}
           style={{
             display: 'flex',
@@ -84,7 +84,7 @@ const UseStateHook = () => {
         >
           <h2>Update State</h2>
           <h2>{updateState}</h2>
-        </div> */}
+        </div>
       </div>
     </div>
   );

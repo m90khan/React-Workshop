@@ -73,7 +73,7 @@ const UseReducerHook = () => {
         {/* 2 */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
-          onClick={() => setObj(someValue, 'increment')}
+          onClick={() => setObj(someValue)}
         >
           <h2>What is UseReducer?</h2> <h2>{obj}</h2>
         </div>

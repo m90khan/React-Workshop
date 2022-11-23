@@ -20,24 +20,24 @@ const UseEffectHook = () => {
     console.log('I run once');
   }, []);
   //2- component mount, unmount, update
-  //   useEffect(() => {
-  //     console.log('I run based on state in the dependency and first time', state);
+  // useEffect(() => {
+  //   console.log('I run based on state in the dependency and first time', state);
   //   // dependency are compared using === sign so const obj = {hello: 10} : objects are never the same in js due to reference in memory
-  //   }, [state]);
+  // }, [state]);
   //   useEffect(() => {
   //     console.log('I run based on state in the dependency and first time', state2);
   //   }, [state2]);
   //   useEffect(() => {
   //     console.log('I run based on state2 in the dependency and first time', state2);
   //   }, [state2]);
-  //   useEffect(() => {
-  //     setState2((val) => val + 1);
-  //     console.log('I am a bad recursive useEffect ', state2);
-  //   }, [state2]);
+  // useEffect(() => {
+  //   setState2((val) => val + 1);
+  //   console.log('I am a bad recursive useEffect ', state2);
+  // }, [state2]);
 
   //3- useEffect cleanup
   /**
-   * 1- UseEffectHook() => useEffect is called after mount
+   * 1- UseEffect Cleanup = () => useEffect is called after mount
    * <state change update>
    * 2- UseEffectHook() => useEffect is called after re-render
    *
@@ -70,7 +70,7 @@ const UseEffectHook = () => {
         </div>
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
-          onClick={() => setState2(2)}
+          onClick={() => setState2(Math.random())}
         >
           <h2>Component Update in useEffect?</h2> <h2>{state2}</h2>
         </div>

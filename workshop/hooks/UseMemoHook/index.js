@@ -30,7 +30,7 @@ const UseMemoHook = () => {
         {/* 1 */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
-          onClick={() => setState(Math.random())}
+          onClick={() => setState(200)}
         >
           <h2>What is UseMemo? {value.count}</h2> <h2>{state}</h2>
         </div>
