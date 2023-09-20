@@ -1,12 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, useContext, useReducer, useState } from 'react';
 // import RemoteComponent from './RemoteComponent';
 import dynamic from 'next/dynamic';
 import { Context } from './store';
@@ -42,6 +34,7 @@ const UseContextHook = () => {
   return (
     <div style={{ width: '90%' }} className={'useref-class'}>
       <h1>UseContext</h1>
+
       <div
         style={{
           display: 'flex',
@@ -51,18 +44,49 @@ const UseContextHook = () => {
         }}
       >
         {/* 1 */}
-        <Context.Provider value={{ globalState, dispatch }}>
-          <div
-            style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
-            onClick={() => setState(Math.random())}
-          >
-            <h2>What is UseContext? </h2> <h2>{state}</h2>
-          </div>
-          <RemoteComponent />
-        </Context.Provider>
+        <LoginProvider>
+          <Context.Provider value={{ globalState, dispatch }}>
+            <div
+              style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
+              onClick={() => setState(Math.random())}
+            >
+              <h2>What is UseContext? </h2> <h2>{state}</h2>
+            </div>
+            <RemoteComponent />
+          </Context.Provider>
+        </LoginProvider>
       </div>
     </div>
   );
 };
 
 export default UseContextHook;
+
+const LoginContext = createContext(null);
+
+function loginReducer(state, action) {
+  switch (action.type) {
+    case 'LOGIN_USER': {
+      return { ...state, user: true };
+    }
+    case 'LOGOUT': {
+      return { ...state, user: false };
+    }
+    default:
+      // throw new Error();
+      return state;
+  }
+}
+
+const LoginProvider = ({ children }) => {
+  const [gbState, dispatch] = useReducer(loginReducer, {
+    user: null,
+  });
+  return (
+    <LoginContext.Provider value={{ gbState, dispatch }}>
+      {children}
+    </LoginContext.Provider>
+  );
+};
+
+export const useGlobalState = () => useContext(LoginContext);

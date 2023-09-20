@@ -1,10 +1,13 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
+import ShoppingCart from './ShoppingCart';
 
+// Reducer function for obj state
 function reducer(state, someValue) {
   // state can be accessed by default
-
   return state * someValue;
 }
+// Reducer function for newState state
+
 function reducer2(state, action) {
   switch (action.type) {
     case 'increment_step': {
@@ -23,13 +26,32 @@ function reducer2(state, action) {
   }
 }
 
+function reducer3(state, action) {
+  switch (action.type) {
+    case 'increment_counter': {
+      return { ...state, counter: counter + state.step };
+    }
+    case 'decrement_counter': {
+      return { ...state, counter: counter - state.step };
+    }
+    case 'increment_step': {
+      return { ...state, step: state.step + action.payload };
+    }
+    case 'decrement_step': {
+      return { ...state, step: state.step - action.payload };
+    }
+    default: {
+      return state;
+    }
+  }
+}
 const UseReducerHook = () => {
   const [state, setState] = useState({
     obj1: 1,
     obj2: 2,
   });
-  //1- Approach with useState?
-  //
+  // 1. Old way of using useState
+  // Function to update state object
   const handleState = (newState) => {
     setState((oldState) => {
       return {
@@ -38,7 +60,8 @@ const UseReducerHook = () => {
       };
     });
   };
-  //2- UseReducer? alternative to useState => Accepts a reducer of type (state, action) => newState
+  // 2. UseReducer: An alternative to useState
+  // Accepts a reducer of type (state, action) => newState
   const [obj, setObj] = useReducer(reducer, 10);
   const someValue = 2;
 
@@ -49,8 +72,8 @@ const UseReducerHook = () => {
   });
 
   useEffect(() => {
-    console.log('I run');
-  }, [newState]);
+    console.log('I run when newState changes:', newState);
+  }, [newState.counter]);
 
   return (
     <div style={{ width: '90%' }} className={'useref-class'}>
@@ -63,21 +86,21 @@ const UseReducerHook = () => {
           flexDirection: 'column',
         }}
       >
-        {/* 1 */}
+        {/* Trigger the state update using old useState */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
           onClick={() => handleState({ obj1: state.obj1 + 1 })}
         >
-          <h2>Old way of using useState</h2> <h2>{state.obj1}</h2>
+          <h2>1. Old way of using useState</h2> <h2>{state.obj1}</h2>
         </div>
-        {/* 2 */}
+        {/* Trigger UseReducer */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
           onClick={() => setObj(someValue)}
         >
           <h2>What is UseReducer?</h2> <h2>{obj}</h2>
         </div>
-        {/* 3 */}
+        {/* UseReducer in Complexity */}
         <div
           style={{
             display: 'flex',
@@ -141,6 +164,7 @@ const UseReducerHook = () => {
           </div>
         </div>
       </div>
+      <ShoppingCart />
     </div>
   );
 };

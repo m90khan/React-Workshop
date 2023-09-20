@@ -1,21 +1,23 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const UseMemoHook = () => {
   const [state, setState] = useState(0);
 
-  //1- useMemo hook => performance optimization => return a memomized value
+  // UseMemo hook => Performance optimization => Returns a memoized value
+  // Use useMemo when you want to memoize a value to prevent unnecessary re-computation.
   const value = useMemo(() => {
-    // run only once
+    // This function runs only once when the component mounts
     console.log('I run once');
-    return { count: 100 };
-  }, []); // dependency can be added incase useMemo should recompute the value
+    return { count: state };
+  }, [state]); // An empty dependency array means it only runs once.
+
   const value2 = 100;
-  // one reason: object referencial value will remain the same here
+  // One reason to use useMemo: object reference value remains the same here
 
   useEffect(() => {
     console.log('Did value changed', value);
   }, [value]);
-  // anything can be memoized using usememo including UI
+
   return (
     <div style={{ width: '90%' }} className={'useref-class'}>
       <h1>UseMemo</h1>
@@ -27,7 +29,7 @@ const UseMemoHook = () => {
           flexDirection: 'column',
         }}
       >
-        {/* 1 */}
+        {/* Example */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
           onClick={() => setState(200)}

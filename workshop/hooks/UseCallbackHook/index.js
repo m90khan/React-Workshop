@@ -1,22 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const UseCallbackHook = () => {
   const [state, setState] = useState(0);
 
-  //1- useCallback hook => performance optimization => return the instance of the function as it is () => { return <h1>Hello world</h1>;} if state is not changed
-
+  // useCallback hook => Performance optimization => Returns the same instance of the function if dependencies do not change.
+  // Use useCallback when you want to memoize a function to prevent unnecessary re-creation.
   const value = useCallback(() => {
-    console.log('I am callback');
+    console.log('I am a callback function');
     return <h1>Hello world</h1>;
-  }, []); // dependency can be added incase useCallback should recompute the function
+  }, []); // An empty dependency array means it only creates the function once.
   // const value2 = useMemo(() => {
   //   return () => <h1>Hello world</h1>;
   // }, []);
   /**
-   * As objects are not equal due to reference same is the same of functions . in every render
+   * As objects are not equal due to reference same is the case of functions . in every render
    * useCallback return the same function over and over again
    */
-
   return (
     <div style={{ width: '90%' }} className={'useref-class'}>
       <h1>UseCallback</h1>
@@ -28,7 +27,7 @@ const UseCallbackHook = () => {
           flexDirection: 'column',
         }}
       >
-        {/* 1 */}
+        {/* Example */}
         <div
           style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}
           onClick={() => setState(Math.random())}

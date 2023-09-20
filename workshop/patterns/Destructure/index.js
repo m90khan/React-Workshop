@@ -1,4 +1,13 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+'use-client';
+import React, {
+  lazy,
+  startTransition,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import CompoundComponent from './CompoundComponent';
 import RemoteComponent from './RemoteComponent';
 // Destructing
 // State machines
@@ -8,22 +17,17 @@ import RemoteComponent from './RemoteComponent';
 // Memomize Functions React.memo
 // Comparator
 
-//Eager
+// Lazy Loading components:
+// Lazy loading is a technique where you load a component or module only when it's needed, improving initial page load performance.
+const Button = lazy(() => import('./CustomButton'));
+
+// Eager Loading:
+// Eager loading is the opposite of lazy loading, where a component or module is loaded immediately, regardless of whether it's needed.
 function loadComponent() {
   import('./RemoteComponent'); // get caached in memory
 }
-const Button = (props) => {
-  const [counter, setCounter] = useState(0);
-  return (
-    <div
-      style={{ color: props.color, fontWeight: props.bold ? 'bold' : '400' }}
-      onClick={() => setCounter((val) => val + props.increment)}
-    >
-      Call me button {counter}
-    </div>
-  );
-};
-// Memo
+
+// Memo: Memoized component
 let CustomUI = (props) => {
   const [counter, setCounter] = useState(false);
   const renderCount = useRef(0);
@@ -40,10 +44,15 @@ let CustomUI = (props) => {
     </div>
   );
 };
+// Memoize Functions (React.memo):
+// Memoization is an optimization technique to cache the results of expensive function calls to improve performance.
+// React.memo is a higher-order component that memoizes a functional component to prevent unnecessary renders.
+
 CustomUI = React.memo(CustomUI);
 
-// comparator
+// Custom comparison function for memoization
 function compare(prevProps, nextProps) {
+  // Change this comparison as needed
   return prevProps == nextProps;
 }
 CustomUI = React.memo(CustomUI, compare);
@@ -73,20 +82,31 @@ const Destructure = () => {
       onMouseEnter={() => setCounter(true)}
       onMouseLeave={() => setCounter(false)}
     >
+      <div>
+        <h1>Compound Component </h1>
+        <CompoundComponent />
+      </div>
       {/* Destructure */}
       {/* <Button color={'blue'} {...props} />
       <Button color={''} {...props} />
       <Button {...props} color='red' /> */}
-      {/* Lazy   */}
-      {/* <Suspense fallback={<div>Loading</div>}>
-        <Button {...props} color='red' />
-      </Suspense> */}
-      {/* Eager */}
+      {/* Lazy Loading */}
+      <Suspense fallback={<div>Loading</div>}>
+        {/*
+          Use startTransition to wrap the code that triggers the update
+        */}
+        {startTransition(() => (
+          <Button {...props} color='red' />
+        ))}
+      </Suspense>
+      {/* Eager Loading */}
       <div style={{ color: 'green' }} onMouseOver={loadComponent}>
         Eager Loading me
       </div>
       <Suspense fallback={<div>Loading</div>}>
-        <RemoteComponent />
+        {startTransition(() => (
+          <RemoteComponent />
+        ))}
       </Suspense>
       {/* Memo */}
       <h2>Memo</h2>
